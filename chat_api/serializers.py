@@ -4,7 +4,7 @@ from .models import *
 class RoomSerializer(serializers.ModelSerializer):
     class Room:
         model = Room
-        fields = ("id", "name", "userslist")
+        fields = "__all__"
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message

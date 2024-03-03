@@ -50,7 +50,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             },
         )
 
-    #helper function to send list of users
+    #helper function to send list of connected users
     async def send_user_list(self):
         user_list = await self.get_connected_users()
         await self.channel_layer.group_send(self.room_group_name,
@@ -90,7 +90,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def create_online_user(self,user):
         try:
-            self.room.online_user.add(user)
+            self.room.add_online_users(user)
             self.room.save()
 
         except Exception as e:
@@ -99,7 +99,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def remove_online_user(self,user):
         try:
-            self.room.online_user.remove(user)
+            self.room.remove_online_users(user)
             self.room.save()
         except Exception as e :
             return None
