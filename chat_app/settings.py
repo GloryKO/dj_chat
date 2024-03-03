@@ -36,16 +36,15 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+
     #third party apps
     "daphne",
-    "django.contrib.staticfiles",
     "channels",
     "rest_framework",
-    
-    #local app
-    "api",
+    'django.contrib.staticfiles',
 
+       #local app
+    "chat_api",
 ]
 
 MIDDLEWARE = [
