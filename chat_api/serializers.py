@@ -8,5 +8,6 @@ class RoomSerializer(serializers.ModelSerializer):
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
-        fields = ("id", "room", "user", "content", "timestamp")
+        fields = ( "room", "user", "content", "timestamp")
         read_only_fields = ("id", "timestamp")
+    

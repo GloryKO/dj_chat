@@ -129,7 +129,9 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-ASGI_APLLICATION = 'backend.asgi.application'
+ASGI_APPLICATION = 'chat_api.routing.application'
+
+#ASGI_APPLICATION = "chat_api.routing.application"
 
 REDIS_HOST = os.environ.get("REDIS_HOST", "redis")
 REDIS_PORT = os.environ.get("REDIS_PORT", 6379)
