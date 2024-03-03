@@ -69,7 +69,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             text_data=json.dumps({"message":message,"username":username,"timestamp":timestamp})
         )
 
-   
+   #send updated user_list to connected usrs
     async def user_list(self,event):
         user_list = event["user_list"]
         await self.send(text_data=json.dumps({"user_list":user_list}))  
@@ -81,12 +81,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
             return Message.objects.create(room=self.room,content=message,user=self.user)
         except Exception as e :
                 return None
-        
+    #handle room creation(gets or create a room)   
     @database_sync_to_async
     def get_or_create_room(self):
         room,_ =Room.objects.get_or_create(name=self.room_group_name)
         return room
     
+    #creates a user
     @database_sync_to_async
     def create_online_user(self,user):
         try:
@@ -96,6 +97,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
         except Exception as e:
             print("Error joining user to room:", str(e))
             return None
+    
+    #removes a user from user list
     @database_sync_to_async
     def remove_online_user(self,user):
         try:
@@ -104,6 +107,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
         except Exception as e :
             return None
     
+    #gets the list of connected users 
     @database_sync_to_async
     def get_connected_users(self):
         return [user.username for user in self.room.online_user.all()]
